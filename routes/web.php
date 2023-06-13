@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LinkController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -35,7 +36,11 @@ Route::prefix('link')->group(function () {
     if(!Auth::check()) {
         // if user is logged in, redirect to dashboard
         Route::post('/create', [LinkController::class, 'create'])->name('link.create');
+        Route::get('/success', [LinkController::class, 'success'])->name('link.success');
     } 
 });
+
+//handle redirect
+Route::get('/{shorturl}', [LinkController::class, 'redirect'])->name('link.redirect');
 
 require __DIR__.'/auth.php';

@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('shortlinks', function (Blueprint $table) {
             $table->id();
             $table->string('shorturl')->unique();
-            $table->string('longurl');
+            $table->text('longurl');
             $table->integer('clicks')->default(0);
             $table->boolean('active')->default(true);
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->dateTime('expires_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

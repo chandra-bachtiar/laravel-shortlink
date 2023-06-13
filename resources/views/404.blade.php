@@ -19,6 +19,7 @@
 <body class="antialiased">
     <div
         class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+
         @if (Route::has('login'))
             <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                 <a href="{{ url('/') }}"
@@ -52,33 +53,7 @@
 
             <div class="flex justify-center mt-4">
                 <div class="text-gray-900 dark:text-gray-100 text-4xl font-bold">
-                    {{ __('Success Short Your Link') }}
-                </div>
-            </div>
-
-            <div class="mt-4">
-                <div class="grid grid-cols-1 md:grid-cols-1 gap-6 lg:gap-8 w-full">
-                    {{-- create a input using tailwind and darkmode --}}
-                    <div class="w-full px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden rounded-lg">
-                        <div class="text-gray-900 dark:text-gray-100 text-xl font-bold text-center">
-                            <span class="hover:text-blue-300 hover:cursor-pointer"
-                                onclick="redirectTo('{{ $shorturl }}')">{{ __($shorturl) }}</span>
-                        </div>
-                        <div class="text-gray-900 dark:text-gray-100 text-sm font-light text-center">
-                            {{ __("Cool... You saved $diff characters.") }}
-                        </div>
-                        <div class="flex justify-center pt-4">
-                            <button onclick="copyToClipboard('{{ $shorturl }}')"
-                                class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5A3.375 3.375 0 006.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0015 2.25h-1.5a2.251 2.251 0 00-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 00-9-9z" />
-                                </svg>
-                                {{ __('Copy Url') }}
-                            </button>
-                        </div>
-                    </div>
+                    {{ __($message) }}
                 </div>
             </div>
 
@@ -104,20 +79,6 @@
             </div>
         </div>
     </div>
-    <script>
-        function copyToClipboard(text) {
-            var dummy = document.createElement("textarea");
-            document.body.appendChild(dummy);
-            dummy.value = text;
-            dummy.select();
-            document.execCommand("copy");
-            document.body.removeChild(dummy);
-        }
-
-        function redirectTo(url) {
-            window.location.href = url;
-        }
-    </script>
 </body>
 
 </html>

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Shortlink extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'shorturl',
+        'longurl',
+    ];
 }
