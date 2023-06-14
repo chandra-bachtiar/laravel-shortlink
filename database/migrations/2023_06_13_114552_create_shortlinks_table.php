@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('clicks')->default(0);
             $table->boolean('active')->default(true);
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->dateTime('expires_at')->nullable();
+            $table->date('expired')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

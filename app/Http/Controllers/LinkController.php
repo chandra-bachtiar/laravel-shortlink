@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Shortlink;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LinkController extends Controller
 {
@@ -13,14 +15,45 @@ class LinkController extends Controller
      */
     public function index()
     {
-        //
+        $currentTime = Carbon::now();
+        $hour = $currentTime->hour;
+
+        if ($hour >= 0 && $hour < 12) {
+            $greeting = 'Selamat pagi';
+        } elseif ($hour >= 12 && $hour < 15) {
+            $greeting = 'Selamat siang';
+        } elseif ($hour >= 15 && $hour < 18) {
+            $greeting = 'Selamat sore';
+        } else {
+            $greeting = 'Selamat malam';
+        }
+
+        $today = Carbon::now();
+        $dayName = $today->translatedFormat('l');
+
+        return view('dashboard', compact('greeting', 'dayName'));
     }
 
     public function success(Request $request)
     {
-        $shorturl = $request->shorturl;
-        $diff = $request->diff;
-        return view('success', compact('shorturl', 'diff'));
+        if (Auth::check()) {
+            $shorturl = $request->shorturl;
+            $diff = $request->diff;
+            $expired = $request->expired;
+            return view('created', compact('shorturl', 'diff', 'expired'));
+        } else {
+            $shorturl = $request->shorturl;
+            $diff = $request->diff;
+            return view('success', compact('shorturl', 'diff'));
+        }
+    }
+
+    public function createIndex()
+    {
+        //expired is today + 7
+        $expired = Carbon::now()->addDays(6)->format('Y-m-d');
+        $url = url('/');
+        return view('create', compact('expired', 'url'));
     }
 
     /**
@@ -32,17 +65,33 @@ class LinkController extends Controller
             'long_url' => 'required'
         ]);
 
-        $link = Shortlink::create([
-            'shorturl' => Str::random(6),
-            'longurl' => $request->long_url,
-            'expires_at' => now()->addDays(1),
-        ]);
-        $shorturl = url('/' . $link->shorturl);
-        //compare long_url with short_url
-        $diff = strlen($request->long_url) - strlen($shorturl);
-        $expired = $link->expires_at;
+        if (Auth::check()) {
+            // dd(Auth::id());
+            $link = Shortlink::create([
+                'shorturl' => $request->custom_url != null ? $request->custom_url : Str::random(6),
+                'longurl' => $request->long_url,
+                'user_id' => Auth::id(),
+                'expired' => $request->expired,
+            ]);
 
-        return redirect()->route('link.success', compact('shorturl', 'diff', 'expired'));
+            $shorturl = url('/' . $link->shorturl);
+            $diff = strlen($request->long_url) - strlen($shorturl);
+            $expired = $link->expired;
+
+            return redirect()->route('url.success', compact('shorturl', 'diff', 'expired'));
+        } else {
+            $link = Shortlink::create([
+                'shorturl' => Str::random(6),
+                'longurl' => $request->long_url,
+                'expired' => Carbon::now()->addDays(1)->format('Y-m-d'),
+            ]);
+
+            $shorturl = url('/' . $link->shorturl);
+            $diff = strlen($request->long_url) - strlen($shorturl);
+            $expired = $link->expired;
+
+            return redirect()->route('link.success', compact('shorturl', 'diff', 'expired'));
+        }
     }
 
     public function redirect(string $shorturl)
@@ -51,8 +100,8 @@ class LinkController extends Controller
         $link = Shortlink::where('shorturl', $shorturl)->first();
 
         //handle if link is unknown
-        if(!$link) {
-            return view('404',['message' => 'This link is unknown.']);
+        if (!$link) {
+            return view('404', ['message' => 'This link is unknown.']);
         }
 
         // if($link->expires_at < now()) {

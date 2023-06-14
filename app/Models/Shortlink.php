@@ -12,5 +12,7 @@ class Shortlink extends Model
     protected $fillable = [
         'shorturl',
         'longurl',
+        'user_id',
+        'expired',
     ];
 }

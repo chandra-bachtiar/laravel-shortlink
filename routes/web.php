@@ -20,27 +20,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/dashboard', [LinkController::class, 'index'])->name('dashboard');
+    Route::get('/create', [LinkController::class, 'createIndex'])->name('url.create');
+    Route::get('/success', [LinkController::class, 'success'])->name('url.success');
 });
 
 //create route group /link
 Route::prefix('link')->group(function () {
     // check if user is logged in
-    if(!Auth::check()) {
-        // if user is logged in, redirect to dashboard
-        Route::post('/create', [LinkController::class, 'create'])->name('link.create');
-        Route::get('/success', [LinkController::class, 'success'])->name('link.success');
-    } 
+    Route::post('/create', [LinkController::class, 'create'])->name('link.create');
+    Route::get('/success', [LinkController::class, 'success'])->name('link.success');
 });
 
+require __DIR__ . '/auth.php';
 //handle redirect
 Route::get('/{shorturl}', [LinkController::class, 'redirect'])->name('link.redirect');
-
-require __DIR__.'/auth.php';
