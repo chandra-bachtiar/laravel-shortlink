@@ -1,12 +1,12 @@
 <x-app-layout>
     <div class="px-10">
-        <h1 class="text-4xl font-bold dark:text-white">{{ $greeting . ', ' . Auth::user()->name }}</h1>
-        <h1 class="dark:text-white">{{ $dayName }}, <span id="text-clock"></span></h1>
-        <h1 class="mt-4 dark:text-white"></h1>
+        <h1 class="text-4xl font-bold dark:text-white text-gray-700">{{ $greeting . ', ' . Auth::user()->name }}</h1>
+        <h1 class="dark:text-white text-gray-700">{{ $dayName }}, <span id="text-clock"></span></h1>
+        <h1 class="mt-4 dark:text-white text-gray-700"></h1>
 
         <div>
             <div id="stats" class="grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-black/60 to-white/5 p-6 rounded-lg">
+                <div class="dark:bg-black/60 bg-white  to-white/5 p-6 rounded-lg">
                     <div class="flex flex-row space-x-4 items-center">
                         <div id="stats-1">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -17,8 +17,8 @@
 
                         </div>
                         <div>
-                            <p class="text-indigo-300 text-sm font-medium uppercase leading-4">Shortlink Created</p>
-                            <p class="text-white font-bold text-2xl inline-flex items-center space-x-2">
+                            <p class="text-indigo-500 dark:text-indigo-300 text-sm font-medium uppercase leading-4">Shortlink Created</p>
+                            <p class="text-gray-700 dark:text-white font-bold text-2xl inline-flex items-center space-x-2">
                                 <span>{{ $totalCreated }} Shortlink</span>
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-black/60 p-6 rounded-lg">
+                <div class="bg-white dark:bg-black/60 p-6 rounded-lg">
                     <div class="flex flex-row space-x-4 items-center">
                         <div id="stats-1">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -44,8 +44,8 @@
 
                         </div>
                         <div>
-                            <p class="text-teal-300 text-sm font-medium uppercase leading-4">Total Clicks</p>
-                            <p class="text-white font-bold text-2xl inline-flex items-center space-x-2">
+                            <p class="dark:text-teal-300 text-teal-500 text-sm font-medium uppercase leading-4">Total Clicks</p>
+                            <p class="text-gray-700 font-bold text-2xl inline-flex items-center space-x-2 dark:text-white">
                                 <span>{{$totalClicks}} Click</span>
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-black/60 p-6 rounded-lg">
+                <div class="bg-white dark:bg-black/60 p-6 rounded-lg">
                     <div class="flex flex-row space-x-4 items-center">
                         <div id="stats-1">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -71,8 +71,8 @@
 
                         </div>
                         <div>
-                            <p class="text-blue-300 text-sm font-medium uppercase leading-4">Expired</p>
-                            <p class="text-white font-bold text-2xl inline-flex items-center space-x-2">
+                            <p class="text-blue-500 dark:text-blue-300 text-sm font-medium uppercase leading-4">Expired</p>
+                            <p class="dark:text-white text-gray-700 font-bold text-2xl inline-flex items-center space-x-2">
                                 <span>{{$totalExpired}} Link</span>
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

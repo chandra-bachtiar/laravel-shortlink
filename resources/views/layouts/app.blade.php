@@ -38,7 +38,7 @@
                 </div>
 
                 <!-- Sidebar -->
-                <div class="flex flex-shrink-0 transition-all bg-[#116D6E]">
+                <div class="flex flex-shrink-0 transition-all bg-white dark:bg-[#116D6E]">
                     <div x-show="isSidebarOpen" @click="isSidebarOpen = false"
                         class="fixed inset-0 z-10 bg-black bg-opacity-50 lg:hidden"></div>
                     <div x-show="isSidebarOpen" class="fixed inset-y-0 z-10 w-16 bg-white dark:bg-[#321E1E]"></div>
@@ -192,7 +192,7 @@
 
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:cursor-pointer"
                                         role="menuitem" onclick="event.preventDefault();
                                         this.closest('form').submit();">Sign out</a>
                                 </form>
@@ -242,7 +242,7 @@
                     </div>
                 </div>
                 <div class="flex flex-col flex-1">
-                    <header class="relative flex items-center justify-between flex-shrink-0 p-4 bg-[#116D6E]">
+                    <header class="relative flex items-center justify-between flex-shrink-0 p-4 bg-white dark:bg-[#116D6E]">
                         <form action="#" class="flex-1">
                             <!--  -->
                         </form>
@@ -329,7 +329,7 @@
                         </div>
                     </header>
 
-                    <div class="flex flex-1 bg-[#116D6E]">
+                    <div class="flex flex-1 dark:bg-[#116D6E] bg-white">
                         {{-- content here --}}
                         <main class="w-full">
                             {{ $slot }}
