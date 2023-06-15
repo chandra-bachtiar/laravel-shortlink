@@ -31,7 +31,12 @@ class LinkController extends Controller
         $today = Carbon::now();
         $dayName = $today->translatedFormat('l');
 
-        return view('dashboard', compact('greeting', 'dayName'));
+        $shortlinks = Shortlink::where('user_id', Auth::id())->orderBy('id', 'desc')->paginate(6);
+        $totalCreated = Shortlink::where('user_id', Auth::id())->count();
+        $totalClicks = Shortlink::where('user_id', Auth::id())->sum('clicks');
+        $totalExpired = Shortlink::where('user_id', Auth::id())->where('expired', '<', Carbon::now())->count();
+
+        return view('dashboard', compact('greeting', 'dayName', 'shortlinks' , 'totalCreated', 'totalClicks', 'totalExpired'));
     }
 
     public function success(Request $request)
