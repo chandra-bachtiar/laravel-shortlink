@@ -1,24 +1,26 @@
 <x-app-layout>
     <div class="px-10">
-        <h1 class="text-4xl font-bold dark:text-white text-gray-700">{{ $greeting . ', ' . Auth::user()->name }}</h1>
-        <h1 class="dark:text-white text-gray-700">{{ $dayName }}, <span id="text-clock"></span></h1>
-        <h1 class="mt-4 dark:text-white text-gray-700"></h1>
+        <h1 class="text-4xl font-bold text-gray-700 dark:text-white">{{ $greeting . ', ' . Auth::user()->name }}</h1>
+        <h1 class="text-gray-700 dark:text-white">{{ $dayName }}, <span id="text-clock"></span></h1>
+        <h1 class="mt-4 text-gray-700 dark:text-white"></h1>
 
         <div>
-            <div id="stats" class="grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="dark:bg-black/60 bg-white  to-white/5 p-6 rounded-lg">
-                    <div class="flex flex-row space-x-4 items-center">
+            <div id="stats" class="grid gap-6 gird-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                <div class="p-6 bg-white rounded-lg dark:bg-black/60 to-white/5">
+                    <div class="flex flex-row items-center space-x-4">
                         <div id="stats-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-10 h-10 dark:text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-10 h-10 dark:text-white">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
                             </svg>
 
                         </div>
                         <div>
-                            <p class="text-indigo-500 dark:text-indigo-300 text-sm font-medium uppercase leading-4">Shortlink Created</p>
-                            <p class="text-gray-700 dark:text-white font-bold text-2xl inline-flex items-center space-x-2">
+                            <p class="text-sm font-medium leading-4 text-indigo-500 uppercase dark:text-indigo-300">
+                                Shortlink Created</p>
+                            <p
+                                class="inline-flex items-center space-x-2 text-2xl font-bold text-gray-700 dark:text-white">
                                 <span>{{ $totalCreated }} Shortlink</span>
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -32,8 +34,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-white dark:bg-black/60 p-6 rounded-lg">
-                    <div class="flex flex-row space-x-4 items-center">
+                <div class="p-6 bg-white rounded-lg dark:bg-black/60">
+                    <div class="flex flex-row items-center space-x-4">
                         <div id="stats-1">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="w-10 h-10 dark:text-white">
@@ -44,9 +46,11 @@
 
                         </div>
                         <div>
-                            <p class="dark:text-teal-300 text-teal-500 text-sm font-medium uppercase leading-4">Total Clicks</p>
-                            <p class="text-gray-700 font-bold text-2xl inline-flex items-center space-x-2 dark:text-white">
-                                <span>{{$totalClicks}} Click</span>
+                            <p class="text-sm font-medium leading-4 text-teal-500 uppercase dark:text-teal-300">Total
+                                Clicks</p>
+                            <p
+                                class="inline-flex items-center space-x-2 text-2xl font-bold text-gray-700 dark:text-white">
+                                <span>{{ $totalClicks }} Click</span>
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -59,21 +63,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-white dark:bg-black/60 p-6 rounded-lg">
-                    <div class="flex flex-row space-x-4 items-center">
+                <div class="p-6 bg-white rounded-lg dark:bg-black/60">
+                    <div class="flex flex-row items-center space-x-4">
                         <div id="stats-1">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="w-10 h-10 dark:text-white">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
                             </svg>
-
-
                         </div>
                         <div>
-                            <p class="text-blue-500 dark:text-blue-300 text-sm font-medium uppercase leading-4">Expired</p>
-                            <p class="dark:text-white text-gray-700 font-bold text-2xl inline-flex items-center space-x-2">
-                                <span>{{$totalExpired}} Link</span>
+                            <p class="text-sm font-medium leading-4 text-blue-500 uppercase dark:text-blue-300">Expired
+                            </p>
+                            <p
+                                class="inline-flex items-center space-x-2 text-2xl font-bold text-gray-700 dark:text-white">
+                                <span>{{ $totalExpired }} Link</span>
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -88,64 +92,11 @@
                 </div>
             </div>
         </div>
-
-
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-8">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Short Link
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Full Link
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Clicks
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Expired
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Action
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($shortlinks as $link)
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <span class="hover:text-blue-500 hover:cursor-pointer"
-                                    onclick="toUrl('{{ url('/' . $link->shorturl) }}')">
-                                    /{{ $link->shorturl }}
-                                </span>
-                            </th>
-                            <td class="px-6 py-4">
-                                <span class="hover:text-blue-500 hover:cursor-pointer"
-                                    onclick="toUrl('{{ $link->longurl }}')">
-                                    {{-- limit just show 100character --}}
-                                    {{ Str::limit($link->longurl, 80) }}
-                                </span>
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $link->clicks }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $link->expired }}
-                            </td>
-                            <td class="px-6 py-4">
-                                <a href="#"
-                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                <a href="#"
-                                    class="font-medium text-red-600 dark:text-red-600 hover:underline ml-4">Delete</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-        {{ $shortlinks->links() }}
+        @if ($isDesktop)
+            @livewire('table-data')
+        @else
+            @livewire('table-data-mobile')
+        @endif
 
 
     </div>

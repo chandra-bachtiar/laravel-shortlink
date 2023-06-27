@@ -159,7 +159,9 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Yoeunes\Toastr\ToastrServiceProvider::class,
+        Jenssegers\Agent\AgentServiceProvider::class,
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -182,6 +184,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 

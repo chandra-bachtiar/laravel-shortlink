@@ -7,6 +7,8 @@ use App\Models\Shortlink;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Jenssegers\Agent\Agent;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LinkController extends Controller
 {
@@ -16,27 +18,28 @@ class LinkController extends Controller
     public function index()
     {
         $currentTime = Carbon::now();
-        $hour = $currentTime->hour;
+        $hour = $currentTime->hour+7;
 
-        if ($hour >= 0 && $hour < 12) {
-            $greeting = 'Selamat pagi';
-        } elseif ($hour >= 12 && $hour < 15) {
-            $greeting = 'Selamat siang';
-        } elseif ($hour >= 15 && $hour < 18) {
-            $greeting = 'Selamat sore';
+        if ($hour >= 0 && $hour < 3) {
+            $greeting = 'Selamat Malam';
+        } elseif ($hour >= 3 && $hour < 9) {
+            $greeting = 'Selamat Pagi';
+        } elseif ($hour >= 9 && $hour < 15) {
+            $greeting = 'Selamat Siang';
+        } elseif ($hour >= 15 && $hour < 21) {
+            $greeting = 'Selamat Sore';
         } else {
-            $greeting = 'Selamat malam';
+            $greeting = 'Selamat Malam';
         }
-
+        $agent = new Agent();
+        $isDesktop = $agent->isDesktop();
         $today = Carbon::now();
         $dayName = $today->translatedFormat('l');
+        $totalCreated = Shortlink::where('user_id', Auth::id())->where('deleted_at',null)->count();
+        $totalClicks = Shortlink::where('user_id', Auth::id())->where('deleted_at',null)->sum('clicks');
+        $totalExpired = Shortlink::where('user_id', Auth::id())->where('deleted_at',null)->where('expired', '<', Carbon::now())->count();
 
-        $shortlinks = Shortlink::where('user_id', Auth::id())->orderBy('id', 'desc')->paginate(6);
-        $totalCreated = Shortlink::where('user_id', Auth::id())->count();
-        $totalClicks = Shortlink::where('user_id', Auth::id())->sum('clicks');
-        $totalExpired = Shortlink::where('user_id', Auth::id())->where('expired', '<', Carbon::now())->count();
-
-        return view('dashboard', compact('greeting', 'dayName', 'shortlinks' , 'totalCreated', 'totalClicks', 'totalExpired'));
+        return view('dashboard', compact('greeting', 'dayName' , 'totalCreated', 'totalClicks', 'totalExpired', 'isDesktop'));
     }
 
     public function success(Request $request)
@@ -61,6 +64,15 @@ class LinkController extends Controller
         return view('create', compact('expired', 'url'));
     }
 
+    public function mobileEdit($id)
+    {
+        //expired is today + 7
+        $expired = Carbon::now()->addDays(6)->format('Y-m-d');
+        $url = url('/');
+        $link = Shortlink::where('id', $id)->first();
+        return view('mobile-edit', compact('expired', 'url', 'link'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -82,7 +94,7 @@ class LinkController extends Controller
             $shorturl = url('/' . $link->shorturl);
             $diff = strlen($request->long_url) - strlen($shorturl);
             $expired = $link->expired;
-
+            toastr()->success('Link has been created successfully!');
             return redirect()->route('url.success', compact('shorturl', 'diff', 'expired'));
         } else {
             $link = Shortlink::create([
@@ -94,7 +106,7 @@ class LinkController extends Controller
             $shorturl = url('/' . $link->shorturl);
             $diff = strlen($request->long_url) - strlen($shorturl);
             $expired = $link->expired;
-
+            toastr()->success('Link has been created successfully!');
             return redirect()->route('link.success', compact('shorturl', 'diff', 'expired'));
         }
     }
@@ -108,10 +120,6 @@ class LinkController extends Controller
         if (!$link) {
             return view('404', ['message' => 'This link is unknown.']);
         }
-
-        // if($link->expires_at < now()) {
-        //     return view('404',['message' => 'This link has expired.']);
-        // }
 
         //increment clicks
         $link->increment('clicks');
@@ -138,17 +146,31 @@ class LinkController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request)
     {
-        //
+        // dd($request->all());
+        Shortlink::where('id', $request->id)->update([
+            'shorturl' => $request->shorturl,
+            'longurl' => $request->longurl,
+            'expired' => $request->expired,
+            // checking if array request has active key
+            'active' => array_key_exists('active', $request->all()) ? true : false,
+        ]);
+        toastr()->success('Link has been updated!', 'Congrats', ['timeOut' => 2000]);
+        return redirect()->route('dashboard');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function delete(Request $request)
     {
-        //
+        // dd($request->all());
+        Shortlink::where('id', $request['id-delete'])->update([
+            'deleted_at' => Carbon::now(),
+        ]);
+        toastr()->success('Link has been deleted!', 'Congrats', ['timeOut' => 2000]);
+        return redirect()->route('dashboard');
     }
 
     /**
