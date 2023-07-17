@@ -44,7 +44,8 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 pt-14">
                 <div class="w-full">
                     <div class="w-full flex justify-center">
-                        <img src="{{ asset('img/chandra.jpg') }}" alt="chandra" class="w-full h-auto rounded-full overflow-hidden">
+                        <img src="{{ asset('img/chandra.jpg') }}" alt="chandra"
+                            class="w-full h-auto rounded-full overflow-hidden">
                     </div>
                     <div class="w-full text-center">
                         <h1 class="dark:text-white text-2xl font-bold">Chandra Bachtiar</h1>
@@ -53,7 +54,8 @@
                 </div>
                 <div class="w-full">
                     <div class="w-full">
-                        <img src="{{ asset('img/marisa.jpg') }}" alt="chandra" class="w-full h-auto rounded-full overflow-hidden">
+                        <img src="{{ asset('img/marisa.jpg') }}" alt="chandra"
+                            class="w-full h-auto rounded-full overflow-hidden">
                     </div>
                     <div class="w-full text-center">
                         <h1 class="dark:text-white text-2xl font-bold">Marisa Naofa</h1>
@@ -62,7 +64,8 @@
                 </div>
                 <div class="w-full">
                     <div class="w-full">
-                        <img src="{{ asset('img/rinaldi.jpg') }}" alt="chandra" class="w-full h-auto rounded-full overflow-hidden">
+                        <img src="{{ asset('img/rinaldi.jpg') }}" alt="chandra"
+                            class="w-full h-auto rounded-full overflow-hidden">
                     </div>
                     <div class="w-full text-center">
                         <h1 class="dark:text-white text-2xl font-bold">Mohammad Rinaldi</h1>
@@ -71,14 +74,15 @@
                 </div>
                 <div class="w-full">
                     <div class="w-full">
-                        <img src="https://i.pravatar.cc/500?u=riski-pratam" alt="chandra" class="w-full h-auto rounded-full overflow-hidden">
+                        <img src="{{ asset('img/riski.jpg') }}" alt="chandra"
+                            class="w-full h-auto rounded-full overflow-hidden">
                     </div>
                     <div class="w-full text-center">
                         <h1 class="dark:text-white text-2xl font-bold">Riski Pratama</h1>
                         <p class="dark:text-white text-sm">200511083</p>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
