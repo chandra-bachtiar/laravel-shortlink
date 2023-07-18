@@ -89,6 +89,13 @@ Sebelum menginstall ada beberapa persiapan yang harus dilakukan sebagai berikut 
 	```bash
     $ npm run dev
     ```
+
+* (optional) jika terdapat error berikut
+      ![image](https://github.com/chandra-bachtiar/laravel-shortlink/assets/84555123/81028c2f-4445-42a3-89ed-de61bd687e12)
+  Jalankan perintah
+  ```bash
+  $ php artisan key:generate
+  ```
    
 * buka browser lalu buka [127.0.0.1:8000](http://127.0.0.1:8000) untuk mengecek apakah server sudah berjalan
 
