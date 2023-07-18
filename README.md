@@ -91,7 +91,7 @@ Sebelum menginstall ada beberapa persiapan yang harus dilakukan sebagai berikut 
     ```
 
 * (optional) jika terdapat error berikut
-      ![image](https://github.com/chandra-bachtiar/laravel-shortlink/assets/84555123/81028c2f-4445-42a3-89ed-de61bd687e12)
+      ![Screenshot_62](https://github.com/chandra-bachtiar/laravel-shortlink/assets/84555123/5d60bcc4-e6fa-4b15-b029-d920d40dfa77)
   Jalankan perintah
   ```bash
   $ php artisan key:generate
