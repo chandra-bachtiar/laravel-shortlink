@@ -7,7 +7,17 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Pada migration ini kita akan membuat tabel failed_jobs.
+     * Dimana migrasi ini telah dibuat otomatis oleh laravel.
+     * terdiri dari beberapa kolom yaitu :
+     * ID : kolom id yang akan menjadi primary key
+     * UUID : kolom uuid
+     * Connection : kolom connection
+     * Queue : kolom queue
+     * Payload : kolom payload
+     * Exception : kolom exception
+     * Failed_at : kolom tanggal failed
+     * 
      */
     public function up(): void
     {
@@ -23,7 +33,7 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Hapus tabel failed_jobs.
      */
     public function down(): void
     {

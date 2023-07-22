@@ -7,7 +7,18 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Pada migration ini kita akan membuat tabel personal_access_tokens.
+     * Dimana migrasi ini telah dibuat otomatis oleh laravel.
+     * terdiri dari beberapa kolom yaitu :
+     * ID : kolom id yang akan menjadi primary key
+     * Tokenable_id : kolom tokenable_id
+     * Tokenable_type : kolom tokenable_type
+     * Name : kolom nama
+     * Token : kolom token
+     * Abilities : kolom abilities
+     * Last_used_at : kolom tanggal terakhir digunakan
+     * Expires_at : kolom tanggal expired
+     * 
      */
     public function up(): void
     {
@@ -24,7 +35,7 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Hapus tabel personal_access_tokens.
      */
     public function down(): void
     {

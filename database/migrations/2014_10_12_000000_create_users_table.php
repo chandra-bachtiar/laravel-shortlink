@@ -7,7 +7,18 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Pada migration ini kita akan membuat tabel users.
+     * Dimana migrasi ini telah dibuat otomatis oleh laravel.
+     * terdiri dari beberapa kolom yaitu :
+     * ID : kolom id yang akan menjadi primary key
+     * Name : kolom nama
+     * Email : kolom email
+     * Email_verified_at : kolom verifikasi email
+     * Password : kolom password
+     * Remember_token : kolom remember token
+     * Created_at : kolom tanggal dibuat
+     * Updated_at : kolom tanggal diupdate
+     * 
      */
     public function up(): void
     {
@@ -23,7 +34,7 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Hapus tabel users.
      */
     public function down(): void
     {

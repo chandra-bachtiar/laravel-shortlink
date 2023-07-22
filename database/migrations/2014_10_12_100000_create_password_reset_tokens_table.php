@@ -7,7 +7,12 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Pada migration ini kita akan membuat tabel password_reset_tokens.
+     * Dimana migrasi ini telah dibuat otomatis oleh laravel.
+     * terdiri dari beberapa kolom yaitu :
+     * Email : kolom email yang akan menjadi primary key
+     * Token : kolom token
+     * Created_at : kolom tanggal dibuat
      */
     public function up(): void
     {
@@ -19,7 +24,7 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Hapus tabel password_reset_tokens.
      */
     public function down(): void
     {
